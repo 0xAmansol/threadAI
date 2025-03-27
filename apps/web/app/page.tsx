@@ -1,12 +1,13 @@
-import { Button } from "@workspace/ui/components/button"
+import { Hero } from "@/components/landingPage/Hero";
+import Navbar from "@/components/landingPage/Navbar";
 
 export default function Page() {
   return (
-    <div className="flex items-center justify-center min-h-svh">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-2xl font-bold">Hello World</h1>
-        <Button size="sm">Button</Button>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex h-full items-center justify-center">
+        <Hero />
+      </main>
     </div>
-  )
+  );
 }
