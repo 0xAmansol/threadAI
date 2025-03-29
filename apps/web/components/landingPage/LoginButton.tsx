@@ -1,7 +1,7 @@
 import { Button } from "@workspace/ui/components/button";
 import { RiTwitterXFill } from "@remixicon/react";
 import { useState } from "react";
-import { supabase } from "@/app/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseClient";
 
 function LoginButton() {
   const [loading, setLoading] = useState(false);
@@ -9,23 +9,18 @@ function LoginButton() {
 
   const signInHandler = async () => {
     try {
+      console.log("🔥 Attempting to sign in...");
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "twitter",
         options: {
           redirectTo: `${window.location.origin}/dashboard`,
         },
       });
-      if (error) {
-        console.log("Auth-error:", error);
-      } else {
-        console.log("Auth-data:", data);
-      }
-    } catch (e: any) {
-      console.error("Exception:", e);
-      setError(e.message);
-    } finally {
-      console.log(error);
-      setLoading(false);
+
+      console.log("📡 API Request Sent:", data, error);
+      if (error) console.error("🚨 Auth Error:", error);
+    } catch (e) {
+      console.error("❌ Exception:", e);
     }
   };
 

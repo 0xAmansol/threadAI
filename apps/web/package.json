@@ -21,8 +21,7 @@
     "@remixicon/react": "^4.6.0",
     "@splinetool/react-spline": "^4.0.0",
     "@splinetool/runtime": "^1.9.79",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/supabase-js": "^2.49.1",
+    "@supabase/supabase-js": "^2.49.3",
     "@workspace/ui": "workspace:*",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -30,12 +29,10 @@
     "lucide-react": "^0.475.0",
     "motion": "^12.5.0",
     "next": "^15.2.0",
-    "next-auth": "^4.24.11",
     "next-themes": "^0.4.4",
     "ngrok": "5.0.0-beta.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "supabase": "^2.19.7",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
