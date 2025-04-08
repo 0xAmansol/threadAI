@@ -1,7 +1,7 @@
 import { Button } from "@workspace/ui/components/button";
 import { RiTwitterXFill } from "@remixicon/react";
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/lib/supabaseBrowserClient";
 
 function LoginButton() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ function LoginButton() {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "twitter",
         options: {
-          redirectTo: `${window.location.origin}/dashboard`,
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
