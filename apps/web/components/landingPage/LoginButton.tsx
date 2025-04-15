@@ -1,41 +1,39 @@
+"use client";
+
 import { Button } from "@workspace/ui/components/button";
 import { RiTwitterXFill } from "@remixicon/react";
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseBrowserClient";
+import { supabase } from "@/utils/supabase/client";
+import { redirect } from "next/navigation";
 
-function LoginButton() {
+export function LoginButton() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  const signInHandler = async () => {
-    try {
-      console.log("🔥 Attempting to sign in...");
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "twitter",
-        options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
-        },
-      });
+  const signInWithTwitter = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "twitter",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback?next=/dashboard`,
+      },
+    });
 
-      console.log("📡 API Request Sent:", data, error);
-      if (error) console.error("🚨 Auth Error:", error);
-    } catch (e) {
-      console.error("❌ Exception:", e);
+    if (data?.url) {
+      redirect(data.url); // Force redirectS
+    }
+
+    if (error) {
+      console.error("OAuth error:", error);
     }
   };
 
   return (
-    <div className="flex flex-col gap-2">
-      <Button variant="outline" onClick={signInHandler} disabled={loading}>
-        <RiTwitterXFill
-          className="me-3 text-[#14171a] dark:text-white/60"
-          size={16}
-          aria-hidden="true"
-        />
-        {loading ? "Signing in..." : "Login with X"}
-      </Button>
-    </div>
+    <Button variant="outline" onClick={signInWithTwitter} disabled={loading}>
+      <RiTwitterXFill
+        className="me-3 text-[#14171a] dark:text-white/60"
+        size={16}
+      />
+      {loading ? "Signing in..." : "Login with X"}
+    </Button>
   );
 }
-
-export { LoginButton };
