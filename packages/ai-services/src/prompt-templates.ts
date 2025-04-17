@@ -8,11 +8,7 @@ export function buildPrompt(
     includeHashtags?: boolean;
   } = {}
 ): string {
-  const {
-    tone = "professional",
-    threadCount = 5,
-    includeHashtags = false,
-  } = options;
+  const { tone = "casual", threadCount = 5, includeHashtags = false } = options;
 
   // Join all content pieces together
   const joinedContent = content.join("\n\n");

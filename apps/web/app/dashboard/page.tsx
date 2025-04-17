@@ -1,6 +1,11 @@
 "use client";
 
+import { InputBox } from "@/components/dashboard/InputBox";
+import { SidebarDemo } from "@/components/dashboard/Sidebar";
 import ThreadPreview from "@/components/dashboard/ThreadPreview";
+import ThreadPreview2 from "@/components/dashboard/ThreadPreview2";
+import TweetCard from "@/components/dashboard/TweetCard";
+import AiChat from "@/components/kokonutui/ai-chat";
 import { useState } from "react";
 
 export default function GenerateThreadForm({ userId }: { userId: string }) {
@@ -42,8 +47,22 @@ export default function GenerateThreadForm({ userId }: { userId: string }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+    <div className="flex min-h-screen">
+      <div className="w-64 flex-shrink-0">
+        <SidebarDemo />
+      </div>
+      <div className="flex-1 flex flex-col">
+        <div className="flex justify-center pt-10">
+          <AiChat />
+        </div>
+        <div className="mt-6 space-y-1 flex flex-col items-center">
+          <ThreadPreview2
+            posts={thread?.posts || []}
+            title={thread?.title || ""}
+          />
+        </div>
+      </div>
+      {/* <form onSubmit={handleSubmit} className="space-y-4 mb-6">
         <input
           type="url"
           placeholder="Paste YouTube URL"
@@ -63,6 +82,7 @@ export default function GenerateThreadForm({ userId }: { userId: string }) {
         {success && <p className="text-green-500">Thread generated!</p>}
       </form>
       {thread && <ThreadPreview title={thread.title} posts={thread.posts} />}
+      <InputBox /> */}
     </div>
   );
 }

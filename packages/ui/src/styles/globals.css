@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 @source "../../../apps/**/*.{ts,tsx}";
 @source "../../../components/**/*.{ts,tsx}";
 @source "../**/*.{ts,tsx}";
@@ -46,6 +47,7 @@
   --color-3: hsl(210 100% 63%);
   --color-4: hsl(195 100% 63%);
   --color-5: hsl(90 100% 63%);
+  --brand: hsl(50 100% 50%);
 }
 
 .dark {
@@ -81,6 +83,12 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --color-1: hsl(330 100% 40%);
+  --color-2: hsl(140 100% 55%);
+  --color-3: hsl(210 100% 30%);
+  --color-4: hsl(60 100% 70%);
+  --color-5: hsl(295 100% 45%);
+  --brand: hsl(50 100% 50%);
 }
 
 @theme inline {
@@ -127,6 +135,7 @@
   --color-color-3: var(----color-3);
   --color-color-2: var(----color-2);
   --color-color-1: var(----color-1);
+  --color-brand: var(----brand);
 
   @keyframes accordion-down {
     from {

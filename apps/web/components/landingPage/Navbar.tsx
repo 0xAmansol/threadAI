@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import ThemeToggleButton from "../ui/theme-toggle-button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -71,6 +72,7 @@ const Navbar = () => {
             <Link href="/signup" className="premium-button">
               Get Started
             </Link>
+            <ThemeToggleButton variant="circle-blur" start="top-right" />
           </nav>
 
           {/* Mobile Menu Button */}
