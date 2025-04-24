@@ -10,7 +10,7 @@ import AiChat from "@/components/ui/kokonutui/ai-chat";
 import { SidebarProvider } from "@workspace/ui/components/sidebar";
 import { useState } from "react";
 
-export default function GenerateThreadForm({ userId }: { userId: string }) {
+export default function GenerateThreadForm() {
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -29,7 +29,7 @@ export default function GenerateThreadForm({ userId }: { userId: string }) {
     try {
       const res = await fetch("/api/generate-thread", {
         method: "POST",
-        body: JSON.stringify({ url, userId }),
+        body: JSON.stringify({ url }),
         headers: {
           "Content-Type": "application/json",
         },
