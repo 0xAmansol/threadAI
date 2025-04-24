@@ -35,7 +35,6 @@ export default function AIInput_07({ onThreadGenerate }: AIInput07Props) {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
 
-      // Update parent component with new thread
       if (onThreadGenerate) {
         onThreadGenerate({
           title: data.videoTitle,
@@ -43,7 +42,6 @@ export default function AIInput_07({ onThreadGenerate }: AIInput07Props) {
         });
       }
 
-      // Reset form
       setUrl("");
       adjustHeight();
     } catch (err: any) {

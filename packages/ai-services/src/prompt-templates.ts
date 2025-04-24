@@ -14,28 +14,32 @@ export function buildPrompt(
   const joinedContent = content.join("\n\n");
 
   return `
-  You are an expert at creating engaging social media threads about YouTube videos.
-  Create a ${threadCount}-post thread about the following YouTube video content in a ${tone} style.
-  Each post should be concise yet informative and engaging.
-  ${includeHashtags ? "Include 2-3 relevant hashtags at the end of the thread." : ""}
-  
-  VIDEO TITLE: ${videoTitle}
-  
-  TRANSCRIPT CONTENT:
-  ${joinedContent}
-  
-  Create a thread that:
-  1. Starts with an engaging hook that captures attention
-  2. Provides the most valuable insights or takeaways from the video
-  3. Maintains a natural flow between posts
-  4. Ends with a compelling conclusion or call to action
-  5. Sounds like it was written by a human, not AI
-  
-  Return the thread as numbered posts:
-  1. First post
-  2. Second post
-  ... and so on
-  
-  Make sure each post can stand alone but also connects to the overall narrative.
+  You are an expert thread writer with the voice and clarity of top Twitter thinkers like Dan Koe, Naval Ravikant, and other influential minds in tech, AI, and modern philosophy.
+
+Write a ${threadCount}-tweet thread based on the following YouTube video content.
+
+VIDEO TITLE: ${videoTitle}
+TRANSCRIPT:
+${joinedContent}
+
+Guidelines:
+
+Start with a hook that grabs attention immediately.
+
+Each tweet should be insightful, human, and worth reading on its own.
+
+Avoid fluff. Prioritize clarity, brevity, and resonance.
+
+No robotic tone. It should feel like it's coming from someone who deeply understands the ideas.
+
+Maintain a natural narrative flow from beginning to end.
+
+End with a thought-provoking insight or a subtle call to action.
+
+Do not include hashtags or tweet labels (like "First tweet", "Second tweet", etc.)
+
+Just return the thread as clean, individual tweets, one after the other.
+
+
   `;
 }

@@ -9,15 +9,18 @@ interface ThreadPreviewProps {
 
 const ThreadPreview2 = ({ title, posts, onEdit }: ThreadPreviewProps) => {
   return (
-    <div className="w-full flex flex-col items-center space-y-1">
-      {posts?.map((post, index) => (
-        <TweetCard
-          key={index}
-          content={{ text: post }}
-          isFirst={index === 0}
-          isLast={index === posts.length - 1}
-        />
-      ))}
+    <div className="w-full flex flex-col items-center space-y-4">
+      <h2 className="text-2xl font-semibold text-center">{title}</h2>
+      <div className="w-full flex flex-col items-center space-y-1">
+        {posts?.map((post, index) => (
+          <TweetCard
+            key={index}
+            content={{ text: post }}
+            isFirst={index === 0}
+            isLast={index === posts.length - 1}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 "use client";
 
+import { AppSidebarInset } from "@/components/dashboard-providers/app-sidebar-inset";
 import { InputBox } from "@/components/dashboard/InputBox";
-import { SidebarDemo } from "@/components/dashboard/Sidebar";
+import { AppSidebar } from "@/components/dashboard/Sidebar";
 import ThreadPreview from "@/components/dashboard/ThreadPreview";
 import ThreadPreview2 from "@/components/dashboard/ThreadPreview2";
 import TweetCard from "@/components/dashboard/TweetCard";
-import AiChat from "@/components/kokonutui/ai-chat";
+import AiChat from "@/components/ui/kokonutui/ai-chat";
+import { SidebarProvider } from "@workspace/ui/components/sidebar";
 import { useState } from "react";
 
 export default function GenerateThreadForm({ userId }: { userId: string }) {
@@ -47,42 +49,21 @@ export default function GenerateThreadForm({ userId }: { userId: string }) {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="w-64 flex-shrink-0">
-        <SidebarDemo />
-      </div>
-      <div className="flex-1 flex flex-col">
-        <div className="flex justify-center pt-10">
-          <AiChat />
+    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+      <div className="flex w-full ">
+        {/* Remove the pl-[280px] padding */}
+        <div className="flex-1 overflow-auto p-6">
+          <div className="flex justify-center">
+            <AiChat />
+          </div>
+          <div className="mt-6 space-y-1 flex flex-col items-center">
+            <ThreadPreview2
+              posts={thread?.posts || []}
+              title={thread?.title || ""}
+            />
+          </div>
         </div>
-        <div className="mt-6 space-y-1 flex flex-col items-center">
-          <ThreadPreview2
-            posts={thread?.posts || []}
-            title={thread?.title || ""}
-          />
-        </div>
       </div>
-      {/* <form onSubmit={handleSubmit} className="space-y-4 mb-6">
-        <input
-          type="url"
-          placeholder="Paste YouTube URL"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          required
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {loading ? "Generating..." : "Generate Thread"}
-        </button>
-        {error && <p className="text-red-500">{error}</p>}
-        {success && <p className="text-green-500">Thread generated!</p>}
-      </form>
-      {thread && <ThreadPreview title={thread.title} posts={thread.posts} />}
-      <InputBox /> */}
     </div>
   );
 }

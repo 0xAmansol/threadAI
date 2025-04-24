@@ -1,140 +1,76 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { Button, buttonVariants } from "@workspace/ui/components/button";
+import { ModeSwitcher } from "@workspace/ui/components/mode-switcher";
+import Image from "next/image";
+
+import { LoginButton } from "./LoginButton";
 import ThemeToggleButton from "../ui/theme-toggle-button";
 
-const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Navbar() {
+  const [showLinks, setShowLinks] = useState(true);
+  let lastScrollY = 0;
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
+      if (window.scrollY > lastScrollY) {
+        setShowLinks(false);
       } else {
-        setIsScrolled(false);
+        setShowLinks(true);
       }
+      lastScrollY = window.scrollY;
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "py-3 bg-white/10 backdrop-blur-2xl border-b border-white/10 shadow-md w-auto"
-          : "py-5 bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          <Link
-            href="/"
-            className="text-2xl font-bold text-primary flex items-center gap-2"
-          >
-            <div className="w-8 h-8 flex items-center justify-center bg-primary rounded-lg">
-              <span className="text-white text-xs font-bold">X</span>
-            </div>
-            <span>Thread AI</span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="/"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              href="/features"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Features
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="/signin"
-              className="text-sm font-medium px-4 py-2 rounded-md border border-input hover:bg-secondary transition-colors"
-            >
-              Log in
-            </Link>
-            <Link href="/signup" className="premium-button">
-              Get Started
-            </Link>
-            <ThemeToggleButton variant="circle-blur" start="top-right" />
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden focus:outline-none"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+    <nav className="h-20 fixed top-0 left-0 right-0 flex items-center z-50 justify-center">
+      <div
+        className={`flex items-center justify-center gap-3 p-2 px-4 bg-muted/70 backdrop-blur-sm transition-all duration-300 rounded-full ${
+          showLinks
+            ? "max-w-[520px] w-full md:gap-8"
+            : "max-w-[320px] w-full md:gap-2"
+        }`}
+      >
+        <Link className="flex text-sm items-center" href={"/"}>
+          <Image
+            width={56}
+            height={56}
+            src="/logo.png"
+            alt="Logo"
+            className="block dark:hidden"
+          />
+          <Image
+            width={40}
+            height={40}
+            src="/logo2.png"
+            alt="Logo"
+            className="hidden dark:block"
+          />
+        </Link>
+        <div
+          className={`flex items-center gap-3 text-md text-gray-700 transition-all duration-300 dark:text-gray-200 ${
+            showLinks
+              ? "opacity-100 max-w-full"
+              : "opacity-0 max-w-0 overflow-hidden"
+          }`}
+        >
+          <Link href={"/community"}>Community</Link>
+          <Link href={"/projects"}>Projects</Link>
+        </div>
+        <div className="flex gap-1 md:gap-2 items-center">
+          <LoginButton />
+          <ThemeToggleButton start="top-right" />
         </div>
       </div>
-
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden glass-morphism py-4 px-4 mt-2 mx-4 rounded-lg animate-fade-in">
-          <nav className="flex flex-col space-y-4">
-            <Link
-              href="/"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              href="/features"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              href="/pricing"
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Pricing
-            </Link>
-            <div className="pt-4 flex flex-col space-y-3">
-              <Link
-                href="/signin"
-                className="text-sm font-medium w-full text-center px-4 py-2 rounded-md border border-input hover:bg-secondary transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Log in
-              </Link>
-              <Link
-                href="/signup"
-                className="premium-button w-full text-center"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Started
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+    </nav>
   );
-};
-
-export default Navbar;
+}

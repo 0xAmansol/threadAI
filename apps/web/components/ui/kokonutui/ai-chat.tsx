@@ -6,7 +6,7 @@ import { cn } from "@workspace/ui/lib/utils";
 import { useEffect, useState } from "react";
 import AIInput_07 from "./ai-chat-07";
 import { supabase } from "@/utils/supabase/client";
-import ThreadPreview2 from "../dashboard/ThreadPreview2";
+import ThreadPreview2 from "../../dashboard/ThreadPreview2";
 
 interface InputProps {
   userName: string;
@@ -49,9 +49,11 @@ export default function AiChat() {
           className={cn("text-center mb-6", "opacity-100 scale-100")}
         >
           <h1 className="text-5xl md:text-6xl font-medium mb-4 tracking-tighter bg-clip-text bg-gradient-to-b from-gray-800 to-gray-500 text-gray-800 dark:text-white">
-            Welcome {userName}
+            Welcome, {userName} 👋
           </h1>
-          <p className="text-xl text-zinc-400">What can I do for you today?</p>
+          <p className="text-xl text-zinc-400">
+            What do you want to curate today?
+          </p>
         </motion.div>
 
         <motion.div

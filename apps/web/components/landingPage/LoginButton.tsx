@@ -28,12 +28,17 @@ export function LoginButton() {
   };
 
   return (
-    <Button variant="outline" onClick={signInWithTwitter} disabled={loading}>
+    <Button
+      variant="outline"
+      onClick={signInWithTwitter}
+      disabled={loading}
+      className="hover:cursor-pointer active:cursor-pointer focus:cursor-pointer rounded-4xl "
+    >
       <RiTwitterXFill
-        className="me-3 text-[#14171a] dark:text-white/60"
+        className="me-3 text-[#14171a] dark:text-white/60 rounded-e-full"
         size={16}
       />
-      {loading ? "Signing in..." : "Login with X"}
+      {loading ? "Signing in..." : "Start Curating"}
     </Button>
   );
 }
