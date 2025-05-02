@@ -18,9 +18,14 @@ export async function storeEmbeddings(
 
   // Process each chunk individually to avoid payload size issues
   for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    if (typeof chunk !== "string" || !chunk) {
+      console.warn(`Skipping invalid or empty chunk at index ${i}`);
+      continue;
+    }
     try {
       // Generate embedding for this chunk
-      const embedding = await generateEmbedding(chunks[i]);
+      const embedding = await generateEmbedding(chunk);
 
       // Insert into vector store
       const { error } = await supabase.from("content_embeddings").insert({
@@ -28,7 +33,7 @@ export async function storeEmbeddings(
         content_id: `youtube_${metadata.videoId}`,
         content_type: "youtube",
         chunk_index: i,
-        chunk_text: chunks[i],
+        chunk_text: chunk,
         embedding: embedding,
         title: metadata.videoTitle || null,
         video_id: metadata.videoId,

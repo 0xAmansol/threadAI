@@ -211,10 +211,10 @@ export function AppSidebar({ children }: { children: React.ReactNode }) {
                   >
                     <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-semibold">
-                        {activeTeam.name}
+                        {activeTeam?.name}
                       </span>
                       <span className="truncate text-xs">
-                        {activeTeam.plan}
+                        {activeTeam?.plan}
                       </span>
                     </div>
                     <ChevronsUpDown className="ml-auto" />

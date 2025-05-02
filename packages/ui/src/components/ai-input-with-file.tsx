@@ -2,10 +2,10 @@
 
 import { CornerRightUp, FileUp, Paperclip, X } from "lucide-react";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
+import { useFileInput } from "../../../../apps/web/hooks/use-file-input.js";
+import { useAutoResizeTextarea } from "../hooks/use-auto-resize-textarea.js";
 import { cn } from "@workspace/ui/lib/utils";
-import { useFileInput } from "@/components/hooks/use-file-input";
-import { useAutoResizeTextarea } from "@/components/hooks/use-auto-resize-textarea";
+import { Textarea } from "./textarea.js";
 
 interface FileDisplayProps {
   fileName: string;
@@ -47,7 +47,7 @@ export function AIInputWithFile({
   accept = "image/*",
   maxFileSize = 5,
   onSubmit,
-  className
+  className,
 }: AIInputWithFileProps) {
   const [inputValue, setInputValue] = useState<string>("");
   const { fileName, fileInputRef, handleFileSelect, clearFile, selectedFile } =
@@ -101,11 +101,11 @@ export function AIInputWithFile({
             )}
             ref={textareaRef}
             value={inputValue}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
               setInputValue(e.target.value);
               adjustHeight();
             }}
-            onKeyDown={(e) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 handleSubmit();
@@ -121,7 +121,7 @@ export function AIInputWithFile({
             <CornerRightUp
               className={cn(
                 "w-3.5 sm:w-4 h-3.5 sm:h-4 transition-opacity dark:text-white",
-                (inputValue || selectedFile) ? "opacity-100" : "opacity-30"
+                inputValue || selectedFile ? "opacity-100" : "opacity-30"
               )}
             />
           </button>

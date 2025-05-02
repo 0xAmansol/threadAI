@@ -91,12 +91,14 @@ export async function generateThread(
 }
 
 function parseThreadPosts(content: string, expectedCount: number): string[] {
-  // Try to parse numbered posts (1. Post text)
+  // Try to parse numbered posts (e.g., "1. This is a tweet")
   const postRegex = /(\d+)[\.|\)]\s+(.*?)(?=\n\d+[\.|\)]|\n*$)/gs;
   const matches = [...content.matchAll(postRegex)];
 
-  if (matches.length > 0) {
-    return matches.map((match) => match[2].trim());
+  if (matches?.length > 0) {
+    return matches
+      .map((match) => match[2]?.trim())
+      .filter((post): post is string => Boolean(post)); // <-- filter out undefined
   }
 
   // Fallback: split by double newlines
@@ -129,7 +131,11 @@ export async function saveThread(
 
     if (error) throw error;
 
-    return data[0].id;
+    if (data && data.length > 0 && data[0]) {
+      return data[0].id;
+    } else {
+      throw new Error("No thread data returned from Supabase");
+    }
   } catch (error) {
     console.error("Failed to save thread:", error);
     throw new Error("Failed to save thread");
