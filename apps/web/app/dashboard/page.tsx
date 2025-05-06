@@ -21,7 +21,7 @@ export default function GenerateThreadForm() {
   return (
     <div className="flex flex-col h-screen w-full ">
       {/* Scrollable content */}
-      <div className="flex-1  pb-60 overflow-hidden">
+      <div className="flex-1  pb-50 overflow-auto">
         <div className="px-4 pt-6 w-full max-w-2xl mx-auto">
           {thread ? (
             <ThreadPreview2 posts={thread.posts} title={thread.title} />

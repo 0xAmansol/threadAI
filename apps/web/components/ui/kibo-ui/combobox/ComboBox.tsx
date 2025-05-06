@@ -47,6 +47,11 @@ const ComboBoxButton = ({
       type="Tweet Length"
       open={open}
       onOpenChange={setOpen}
+      value={value.toString()} // Ensures the combobox shows the current selection
+      onValueChange={(val: string) => {
+        const num = parseInt(val, 10);
+        if (!isNaN(num)) onValueChange(num);
+      }}
     >
       <ComboboxTrigger />
       <ComboboxContent>
@@ -65,4 +70,5 @@ const ComboBoxButton = ({
     </Combobox>
   );
 };
+
 export default ComboBoxButton;
