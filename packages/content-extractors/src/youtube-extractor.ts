@@ -1,5 +1,6 @@
 import { YoutubeTranscript } from "youtube-transcript";
 import axios from "axios";
+import { Innertube } from "youtubei.js/web";
 import { env } from "@workspace/shared/env";
 
 export interface VideoMetadata {
@@ -8,6 +9,29 @@ export interface VideoMetadata {
   thumbnailUrl: string;
   videoId: string;
 }
+
+export const fetchTranscript = async (video_id: string) => {
+  const youtube = await Innertube.create({
+    lang: "en",
+    location: "US",
+    retrieve_player: false,
+  });
+
+  try {
+    const info = await youtube.getInfo(video_id);
+    const title = info.primary_info?.title.text;
+    const transcriptData = await info.getTranscript();
+    const transcript =
+      transcriptData?.transcript?.content?.body?.initial_segments.map(
+        (segment) => segment.snippet.text
+      );
+
+    return { title, transcript };
+  } catch (error) {
+    console.error("Error fetching transcript:", error);
+    throw error;
+  }
+};
 
 export function isYoutubeUrl(url: string): boolean {
   return url.includes("youtube.com/watch") || url.includes("youtu.be/");
@@ -30,17 +54,12 @@ export async function extractYoutubeTranscript(url: string): Promise<string> {
   const videoId = extractVideoId(url);
 
   if (!videoId) {
-    throw new Error("could not extract videoId from URL");
+    throw new Error("Invalid video URL or missing video ID");
   }
 
-  try {
-    const transcript = await YoutubeTranscript.fetchTranscript(videoId);
-    console.log(transcript);
-    return transcript.map((t) => t.text).join("");
-  } catch (error) {
-    console.log(error);
-    throw new Error(`Error ${error}`);
-  }
+  const { title, transcript } = await fetchTranscript(videoId);
+
+  return transcript?.join(" ") || "Transcript not available";
 }
 
 export async function getYoutubeMetadata(url: string): Promise<VideoMetadata> {

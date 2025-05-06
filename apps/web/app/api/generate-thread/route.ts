@@ -6,6 +6,7 @@ import {
   saveThread,
 } from "@workspace/ai-services/thread-generator";
 import { createClient } from "@/utils/supabase/server";
+import { error } from "console";
 
 export async function POST(req: NextRequest) {
   const supabase = await createClient();
@@ -40,6 +41,10 @@ export async function POST(req: NextRequest) {
       supabaseUrl: process.env.SUPABASE_URL!,
       supabaseKey: process.env.SUPABASE_ANON_KEY!,
     });
+
+    if (!thread) {
+      throw new Error(`Error generating the thread ${error}`);
+    }
 
     const profilePicture = session.user.user_metadata?.avatar_url || null;
 

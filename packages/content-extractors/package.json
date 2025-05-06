@@ -14,9 +14,10 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@workspace/shared": "workspace:*",
     "axios": "^1.8.4",
     "youtube-transcript": "^1.2.1",
-    "@workspace/shared": "workspace:*"
+    "youtubei.js": "^13.4.0"
   },
   "exports": {
     "./content-processor": "./src/content-processor.ts",
