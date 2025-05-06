@@ -39,7 +39,7 @@ export async function extractYoutubeTranscript(url: string): Promise<string> {
     return transcript.map((t) => t.text).join("");
   } catch (error) {
     console.log(error);
-    throw new Error("🎙️ Captions not available or failed to fetch.");
+    throw new Error(`Error ${error}`);
   }
 }
 
