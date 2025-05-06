@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { Sidebar } from "lucide-react";
+import { SidebarProvider } from "@workspace/ui/components/sidebar";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

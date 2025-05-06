@@ -1,4 +1,3 @@
-// packages/ai-services/src/prompt-templates.ts
 export function buildPrompt(
   videoTitle: string,
   content: string[],
@@ -10,36 +9,45 @@ export function buildPrompt(
 ): string {
   const { tone = "casual", threadCount = 5, includeHashtags = false } = options;
 
-  // Join all content pieces together
+  const toneInstructions: Record<string, string> = {
+    professional:
+      "Use a clear, authoritative, and concise tone suitable for professionals and domain experts. Avoid slang and maintain a polished style.",
+    casual:
+      "Use a relaxed, friendly, and slightly witty tone. Make the content feel approachable and conversational, like you're talking to a friend.",
+    witty:
+      "Use humor, clever wordplay, and punchy lines. Keep it entertaining while still delivering value.",
+    inspirational:
+      "Use a motivational and uplifting tone. Your goal is to energize and inspire the reader.",
+    analytical:
+      "Use a logical, data-driven tone. Break down concepts clearly and avoid emotional language.",
+  };
+
+  const toneStyle = toneInstructions[tone];
+
   const joinedContent = content.join("\n\n");
 
   return `
-  You are an expert thread writer with the voice and clarity of top Twitter thinkers like Dan Koe, Naval Ravikant, and other influential minds in tech, AI, and modern philosophy.
+You are an expert Twitter thread writer with the voice and clarity of top thinkers like Dan Koe, Naval Ravikant, and other influential minds in tech, AI, and modern philosophy.
 
-Write a ${threadCount}-tweet thread based on the following YouTube video content.
+Your task is to write a ${threadCount}-tweet thread based on the following YouTube video content.
 
 VIDEO TITLE: ${videoTitle}
+
 TRANSCRIPT:
 ${joinedContent}
 
-Guidelines:
+WRITING STYLE:
+${toneStyle}
 
-Start with a hook that grabs attention immediately.
+ADDITIONAL GUIDELINES:
+- Start with a hook that grabs attention in the first tweet.
+- Each tweet should deliver standalone value but also build toward a cohesive narrative.
+- Avoid fluff. Be clear, sharp, and human.
+- Do not use a robotic tone.
+- Conclude the thread with a powerful insight or call to action.
+${includeHashtags ? "- Include relevant hashtags." : "- Do NOT include any hashtags."}
+- Do not number the tweets (e.g., '1/10', '2/10').
 
-Each tweet should be insightful, human, and worth reading on its own.
-
-Avoid fluff. Prioritize clarity, brevity, and resonance.
-
-No robotic tone. It should feel like it's coming from someone who deeply understands the ideas.
-
-Maintain a natural narrative flow from beginning to end.
-
-End with a thought-provoking insight or a subtle call to action.
-
-Do not include hashtags or tweet labels (like "First tweet", "Second tweet", etc.)
-
-Just return the thread as clean, individual tweets, one after the other.
-
-
-  `;
+Output only the individual tweets as plain text, one after the other, separated by newlines.
+`;
 }

@@ -14,8 +14,10 @@ import { env } from "@workspace/shared/env";
 import { generateContent } from "./gemini-service";
 
 interface ThreadOptions {
-  tone?: "professional" | "casual" | "creative";
+  tone?: string;
   threadCount?: number;
+  category?: string;
+  username?: string;
   includeHashtags?: boolean;
   userId?: string;
   supabaseKey: string;
@@ -26,12 +28,15 @@ interface GeneratedThread {
   posts: string[];
   videoTitle: string;
   videoId: string;
+  thumbnailUrl?: string;
+  username?: string;
 }
 
 export async function generateThread(
   url: string,
   options: ThreadOptions
 ): Promise<GeneratedThread> {
+  console.log(options);
   // Validate URL
   if (!isYoutubeUrl(url)) {
     throw new Error("Provided URL is not a valid YouTube URL");
@@ -66,6 +71,7 @@ export async function generateThread(
     // 5. Generate thread using Gemini
     const prompt = buildPrompt(metadata.title, [relevantContent], {
       tone: options.tone,
+
       threadCount: options.threadCount,
       includeHashtags: options.includeHashtags,
     });
@@ -79,15 +85,31 @@ export async function generateThread(
     // 6. Parse response into individual posts
     const posts = parseThreadPosts(response, options.threadCount || 5);
 
+    // Get thumbnail URL from metadata
+    const thumbnailUrl =
+      metadata.thumbnailUrl || getThumbnailUrlFromVideoId(videoId);
+
     return {
       posts,
       videoTitle: metadata.title,
       videoId,
+      thumbnailUrl, // Include the thumbnail URL
     };
   } catch (error) {
     console.error("Thread generation error:", error);
     throw error;
   }
+}
+
+// Utility function to get thumbnail URL directly from video ID if metadata doesn't have it
+function getThumbnailUrlFromVideoId(videoId: string): string {
+  // YouTube provides several thumbnail options
+  // maxresdefault (1280x720)
+  // hqdefault (480x360)
+  // mqdefault (320x180)
+  // sddefault (640x480)
+  // default (120x90)
+  return `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
 }
 
 function parseThreadPosts(content: string, expectedCount: number): string[] {
@@ -112,6 +134,9 @@ function parseThreadPosts(content: string, expectedCount: number): string[] {
 
 export async function saveThread(
   userId: string,
+  username: string,
+  url: string,
+  userProfile: string,
   thread: GeneratedThread,
   options: ThreadOptions
 ): Promise<string> {
@@ -122,8 +147,13 @@ export async function saveThread(
       .from("threads")
       .insert({
         user_id: userId,
+        username: username,
+        user_profile_picture: userProfile,
         video_id: thread.videoId,
         video_title: thread.videoTitle,
+        video_url: url,
+        thumbnail_url: thread.thumbnailUrl,
+        category: options.category,
         posts: thread.posts,
         options: options,
       })
