@@ -114,7 +114,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="px-2 py-16 md:py-24" ref={containerRef}>
+    <section className="px-2 py-16 md:py-24" ref={containerRef} id="how-to">
       <div className="mx-auto max-w-7xl">
         <motion.div
           className="my-12 text-center md:my-16"

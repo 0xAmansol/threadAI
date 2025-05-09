@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import { LoginButton } from "./LoginButton";
 import { AvatarGroup } from "../ui/magicui/avatar-icons";
 import { FlameIcon } from "@workspace/ui/components/flame";
+import { HeroPillFirst } from "../ui/magicui/announcement";
 
 export default function Hero2() {
   const containerVariants = {
@@ -94,6 +95,12 @@ export default function Hero2() {
             variants={itemVariants}
             className="z-20 w-full items-center justify-center text-center  text-4xl font-bold sm:text-5xl "
           >
+            <motion.div
+              variants={itemVariants}
+              className="  flex justify-center items-center pb-3"
+            >
+              <HeroPillFirst />
+            </motion.div>
             Transform any video into a blog post, thread, or newsletter{" "}
             <span className="clip-text h-fit w-fit bg-gradient-to-r from-yellow-600 to-yellow-200 bg-clip-text font-[800] text-transparent transition-all duration-200">
               in Seconds
@@ -113,19 +120,19 @@ export default function Hero2() {
               avatars={[
                 {
                   src: "https://avatars.githubusercontent.com/u/8079861",
-                  label: "HextaUI",
+                  label: "Kirat",
                 },
                 {
-                  src: "https://avatars.githubusercontent.com/u/76874341",
-                  label: "HextaUI",
+                  src: "https://avatars.githubusercontent.com/u/76801862?v=4",
+                  label: "Amrit",
                 },
                 {
                   src: "https://avatars.githubusercontent.com/u/37402791",
-                  label: "HextaUI",
+                  label: "Aman",
                 },
                 {
                   src: "https://avatars.githubusercontent.com/u/89733575",
-                  label: "HextaUI",
+                  label: "Raul",
                 },
               ]}
             />

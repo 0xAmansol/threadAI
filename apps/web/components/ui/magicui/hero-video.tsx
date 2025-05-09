@@ -3,7 +3,7 @@ import HeroVideoDialog from "./hero-video-dialog";
 
 export function HeroVideoDialogDemo() {
   return (
-    <div className="flex z-50 pt-20 w-6xl">
+    <div className="flex z-50 pt-5 w-6xl">
       <Safari
         url="thread-ai.vercel.app"
         className="size-full shadow-2xl shadow-yellow-500"

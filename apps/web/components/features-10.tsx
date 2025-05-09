@@ -73,6 +73,7 @@ export function Features() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
+      id="features"
     >
       <div className="mx-auto max-w-2xl px-6 lg:max-w-5xl">
         <motion.div

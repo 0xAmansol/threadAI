@@ -53,8 +53,8 @@ export default function Navbar() {
               : "opacity-0 max-w-0 overflow-hidden"
           }`}
         >
-          <Link href={"/features"}>Features</Link>
-          <Link href={"/how-to"}>How to</Link>
+          <Link href={"/#features"}>Features</Link>
+          <Link href={"/#how-to"}>How to</Link>
         </div>
         <div className="flex gap-1 md:gap-2 items-center">
           <LoginButton />

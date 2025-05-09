@@ -46,10 +46,14 @@ import {
 import { UserMetadata } from "@supabase/supabase-js";
 import { supabase } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { cn } from "@workspace/ui/lib/utils";
+import { usePathname } from "next/navigation";
 
 interface MenuItemProps {
   icon: ReactNode;
   label: string;
+  disabled?: boolean;
+  isActive?: boolean;
   badgeCount?: number | string | null;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
@@ -59,14 +63,21 @@ const MenuItemWithBadge = ({
   icon,
   label,
   badgeCount = null,
+  disabled = false,
+  isActive = false,
   onClick,
 }: MenuItemProps) => (
   <SidebarMenuItem>
     <SidebarMenuButton
-      className="justify-between hover:bg-yellow-500 hover:text-black"
+      className={cn(
+        "justify-between",
+        "hover:bg-yellow-500 hover:text-black",
+        isActive && "bg-yellow-500 text-black",
+        disabled && "opacity-20 cursor-not-allowed"
+      )}
       variant="outline"
-      onClick={onClick}
-      color="yellow"
+      onClick={disabled ? undefined : onClick}
+      isActive={isActive}
     >
       <div className="flex items-center gap-2">
         {icon}
@@ -93,8 +104,10 @@ export function EmailDashboard({ onToggle }: EmailDashboardProps) {
   const [loading, setLoading] = useState(false);
   const [threads, setThreads] = useState<string[]>();
   const [error, setError] = useState<string | Record<string, any>>({});
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const toggleSidebar = () => {
     const newCollapsedState = !collapsed;
@@ -231,16 +244,21 @@ export function EmailDashboard({ onToggle }: EmailDashboardProps) {
                 <SidebarMenu>
                   <MenuItemWithBadge
                     icon={<TelescopeIcon className="h-4 w-4" />}
+                    isActive={pathname === "/dashboard/history"}
                     label="Discover"
                     badgeCount={totalThreads}
                     onClick={() => router.push("/dashboard/history")}
                   />
                   <MenuItemWithBadge
+                    disabled
+                    isActive={activeItem === "Drafts"}
                     icon={<FileText className="h-4 w-4" />}
                     label="Drafts"
                     onClick={() => router.push("/dashboard/drafts")}
                   />
                   <MenuItemWithBadge
+                    disabled
+                    isActive={activeItem === "Sent"}
                     icon={<Send className="h-4 w-4" />}
                     label="Sent"
                     badgeCount="0"

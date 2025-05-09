@@ -12,6 +12,7 @@ import { ThemeSwitcher } from "@/components/ui/kibo-ui/theme-switcher";
 import ThemeToggleButton from "@/components/ui/theme-toggle-button";
 import Link from "next/link";
 import Image from "next/image";
+import { BannerNewFeature } from "@/components/landingPage/Banner";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

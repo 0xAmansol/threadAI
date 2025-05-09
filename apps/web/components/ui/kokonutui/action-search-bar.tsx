@@ -32,9 +32,9 @@ interface SearchResult {
 const allActionsSample = [
   {
     id: "1",
-    label: "Book tickets",
+    label: "Convert blogs video to tweet",
     icon: <PlaneTakeoff className="h-4 w-4 text-blue-500" />,
-    description: "Operator",
+    description: "Gemini",
     short: "⌘K",
     end: "Agent",
   },
@@ -48,7 +48,7 @@ const allActionsSample = [
   },
   {
     id: "3",
-    label: "Screen Studio",
+    label: "Convert yt videos to tweet",
     icon: <Video className="h-4 w-4 text-purple-500" />,
     description: "gpt-4o",
     short: "",
@@ -56,15 +56,7 @@ const allActionsSample = [
   },
   {
     id: "4",
-    label: "Talk to Jarvis",
-    icon: <AudioLines className="h-4 w-4 text-green-500" />,
-    description: "gpt-4o voice",
-    short: "",
-    end: "Active",
-  },
-  {
-    id: "5",
-    label: "Kokonut UI - Pro",
+    label: "Schedule Tweets(Coming soon)",
     icon: <LayoutGrid className="h-4 w-4 text-blue-500" />,
     description: "Components",
     short: "",
