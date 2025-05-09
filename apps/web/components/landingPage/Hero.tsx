@@ -6,7 +6,7 @@ import { AuroraText } from "../ui/magicui/aurora-text";
 import { HeroPillFirst } from "../ui/magicui/announcement";
 
 import { HeroVideoDialogDemo } from "../ui/magicui/hero-video";
-import { AvatarIcons } from "../ui/magicui/avatar-icons";
+
 import { SmallRating } from "../ui/magicui/default-rating";
 import { LoginButton } from "./LoginButton";
 
@@ -29,7 +29,6 @@ export function Hero() {
           No credit card required • Free plan available
         </div>
         <div className="pt-6">
-          <AvatarIcons />
           <SmallRating />
         </div>
         <HeroVideoDialogDemo />
