@@ -63,9 +63,10 @@ const MenuItemWithBadge = ({
 }: MenuItemProps) => (
   <SidebarMenuItem>
     <SidebarMenuButton
-      className="justify-between"
+      className="justify-between hover:bg-yellow-500 hover:text-black"
       variant="outline"
       onClick={onClick}
+      color="yellow"
     >
       <div className="flex items-center gap-2">
         {icon}

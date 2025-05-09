@@ -12,7 +12,7 @@ import { LoginButton } from "./LoginButton";
 
 export function Hero() {
   return (
-    <div className="w-full flex flex-col items-center justify-center text-center py-40 px-4 max-w-4xl mx-auto">
+    <div className="w-full flex flex-col items-center justify-center text-center py-40 px-4 max-w-4xl mx-auto h-auto">
       <div className="max-w-7xl w-full h-full flex flex-col items-center justify-center text-center px-4">
         <HeroPillFirst />
         <h1 className="text-4xl font-bold tracking-tighter text-gray-800 md:text-5xl lg:text-6xl text-center max-w-[90vw] dark:text-gray-200">

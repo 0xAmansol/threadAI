@@ -36,25 +36,15 @@ export default function Navbar() {
       <div
         className={`flex items-center justify-center gap-3 p-2 px-4 bg-muted/70 backdrop-blur-sm transition-all duration-300 rounded-full ${
           showLinks
-            ? "max-w-[520px] w-full md:gap-8"
-            : "max-w-[320px] w-full md:gap-2"
+            ? "max-w-[620px] w-full md:gap-7"
+            : "max-w-[420px] w-full md:gap-1"
         }`}
       >
         <Link className="flex text-sm items-center" href={"/"}>
-          <Image
-            width={56}
-            height={56}
-            src="/logo.png"
-            alt="Logo"
-            className="block dark:hidden"
-          />
-          <Image
-            width={40}
-            height={40}
-            src="/logo2.png"
-            alt="Logo"
-            className="hidden dark:block"
-          />
+          <p className="font-secondary text-sm font-extrabold tracking-tight md:text-lg">
+            kreate<span className="text-yellow-500">AI</span>
+            <span className="text-yellow-500">.</span>
+          </p>
         </Link>
         <div
           className={`flex items-center gap-3 text-md text-gray-700 transition-all duration-300 dark:text-gray-200 ${
@@ -63,8 +53,8 @@ export default function Navbar() {
               : "opacity-0 max-w-0 overflow-hidden"
           }`}
         >
-          <Link href={"/community"}>Community</Link>
-          <Link href={"/projects"}>Projects</Link>
+          <Link href={"/features"}>Features</Link>
+          <Link href={"/how-to"}>How to</Link>
         </div>
         <div className="flex gap-1 md:gap-2 items-center">
           <LoginButton />

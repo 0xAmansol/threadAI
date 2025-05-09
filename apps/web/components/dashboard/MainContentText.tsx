@@ -6,9 +6,9 @@ export function DashboardMain() {
       <div className="w-full max-w-4xl space-y-8">
         <div className="h-64 w-full  border-gray-200 rounded-lg overflow-hidden">
           <TextParticle
-            text="ThreadAI"
+            text="kreateAI"
             fontSize={150}
-            particleColor="gray"
+            particleColor="yellow"
             particleSize={1}
             particleDensity={5}
           />

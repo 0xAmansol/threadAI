@@ -32,10 +32,10 @@ export function LoginButton() {
       variant="outline"
       onClick={signInWithTwitter}
       disabled={loading}
-      className="hover:cursor-pointer active:cursor-pointer focus:cursor-pointer rounded-4xl "
+      className="hover:cursor-pointer active:cursor-pointer focus:cursor-pointer rounded-4xl bg-gradient-to-t from-yellow-500 to-yellow-300 text-black"
     >
       <RiTwitterXFill
-        className="me-3 text-[#14171a] dark:text-white/60 rounded-e-full"
+        className="me-3 text-[#14171a]  rounded-e-full"
         size={16}
       />
       {loading ? "Signing in..." : "Start Curating"}

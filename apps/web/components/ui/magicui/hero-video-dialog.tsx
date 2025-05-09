@@ -85,15 +85,15 @@ export default function HeroVideoDialog({
   return (
     <div className={cn("relative", className)}>
       <div
-        className="group relative cursor-pointer overflow-hidden rounded-md pt-30"
+        className="group relative cursor-pointer overflow-hidden rounded-md pt-30 ml-5"
         onClick={() => setIsVideoOpen(true)}
       >
         {/* Main thumbnail */}
         <img
           src={thumbnailSrc}
           alt={thumbnailAlt}
-          width={1920}
-          height={1080}
+          width={1870}
+          height={898}
           className="w-5xl rounded-md border shadow-lg object-cover "
         />
 
@@ -110,19 +110,6 @@ export default function HeroVideoDialog({
         </div>
 
         {/* Play button overlay */}
-        <div className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 group-hover:opacity-100 opacity-0">
-          <div className="flex size-28 items-center justify-center rounded-full bg-primary/10">
-            <div className="relative flex size-20 items-center justify-center rounded-full bg-gradient-to-b from-primary/30 to-primary shadow-md transition-transform duration-300 ease-in-out">
-              <Play
-                className="size-8 fill-white text-white transition-transform duration-300 ease-in-out group-hover:scale-105"
-                style={{
-                  filter:
-                    "drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06))",
-                }}
-              />
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Video Dialog */}
