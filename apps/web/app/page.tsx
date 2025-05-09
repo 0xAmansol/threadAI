@@ -34,7 +34,7 @@ export const metadata = {
     title: "kreateAI",
     description:
       "Create high-quality tweets by just pasting video links in seconds",
-    images: ["https://avatars.githubusercontent.com/u/118182376?v=4"],
+    images: ["/kreateAI.png"],
   },
 };
 
