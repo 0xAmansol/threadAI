@@ -30,20 +30,20 @@ export default function Footer() {
               <span className="text-yellow-500">.</span>
             </p>
             <p className="text-sm text-gray-400">
-              Showcase your open-source journey in style.
+              Create tweets/blogs through vidoes, effortlessly.
             </p>
           </aside>
 
           <aside className="mt-6 flex flex-wrap items-center gap-6">
             <div className="flex items-center gap-4">
               <Link
-                href={"https://github.com/amanbairagi30/merged-n-share/"}
+                href={"https://github.com/0xAmansol/threadAI"}
                 className="group rounded-full p-2 transition-colors hover:bg-gray-800 "
               >
                 <GitHubLogoIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
               </Link>
               <Link
-                href={"https://x.com/AMANBAIRAGI_30/"}
+                href={"https://x.com/0xAmansol"}
                 className="group rounded-full p-2 transition-colors hover:bg-gray-800 "
               >
                 <TwitterLogoIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
@@ -61,8 +61,8 @@ export default function Footer() {
             <p className="text-sm text-gray-400">
               Made with <Heart className="inline h-3 w-3 text-red-500" /> by{" "}
               <Link
-                href="https://github.com/amanbairagi30"
-                className="font-medium text-white hover:text-yellow-500 transition-colors"
+                href="https://x.com/0xAmansol"
+                className="font-medium dark:text-white text-gray-500 hover:text-yellow-500 transition-colors"
               >
                 Aman
               </Link>
