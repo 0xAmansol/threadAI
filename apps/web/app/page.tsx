@@ -21,7 +21,10 @@ export default function Page() {
           name="twitter:description"
           content="Create high-quality tweets by just pasting video links in seconds"
         />
-        <meta name="twitter:image" content="/kreateAI.png" />
+        <meta
+          name="twitter:image"
+          content="https://avatars.githubusercontent.com/u/118182376?v=4"
+        />
         <meta name="twitter:url" content="https://thread-ai-web.vercel.app/" />
         <meta name="twitter:site" content="@0xAmansol" />
       </Head>
