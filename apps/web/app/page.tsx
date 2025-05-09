@@ -21,7 +21,7 @@ export const metadata = {
     url: "https://thread-ai-web.vercel.app",
     images: [
       {
-        url: "https://avatars.githubusercontent.com/u/118182376?v=4",
+        url: "/kreateAI.png",
         width: 1200,
         height: 630,
         alt: "kreateAI Thumbnail",
