@@ -21,7 +21,7 @@ export const metadata = {
     url: "https://thread-ai-web.vercel.app",
     images: [
       {
-        url: "/kreateAI.png",
+        url: "https://i.ibb.co/r2DN0tLz/kreateAI.png",
         width: 1200,
         height: 630,
         alt: "kreateAI Thumbnail",
@@ -34,7 +34,7 @@ export const metadata = {
     title: "kreateAI",
     description:
       "Create high-quality tweets by just pasting video links in seconds",
-    images: ["/kreateAI.png"],
+    images: ["https://i.ibb.co/r2DN0tLz/kreateAI.png"],
   },
 };
 
