@@ -11,7 +11,7 @@ import { BannerNewFeature } from "@/components/landingPage/Banner";
 import Head from "next/head";
 
 export const metadata = {
-  title: "Amazing Website Title",
+  title: "kreateAI",
   description:
     "Create high-quality tweets by just pasting video links in seconds",
   openGraph: {
