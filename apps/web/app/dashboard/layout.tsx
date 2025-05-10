@@ -61,15 +61,15 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <div
             className={`
               ${sidebarCollapsed || isMobile ? "hidden" : "block"}
-              md:flex flex-col transition-all duration-300 h-full border-r border-border bg-white z-10 w-64
+              sm:flex flex-col transition-all duration-300 h-full border-r border-border bg-white z-10 w-64
             `}
           >
             <EmailDashboard />
           </div>
 
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 pt-2">
             {/* Top Header */}
-            <div className="h-12 w-full flex items-center justify-between z-20 px-2 py-2 border-b border-border bg-background">
+            <div className="h-12 w-full flex items-center justify-between z-20 px-2 py-2   bg-background">
               <div className="flex items-center gap-2">
                 {/* Mobile sidebar toggle */}
                 <button
@@ -80,7 +80,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   <Menu className="w-5 h-5" />
                 </button>
 
-                <div className="w-full max-w-xs md:max-w-md h-10">
+                <div className="w-full max-w-xs sm:max-w-md h-10 items-center ">
                   <ActionSearchBar />
                 </div>
               </div>

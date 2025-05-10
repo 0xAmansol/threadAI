@@ -142,6 +142,8 @@ export default function DiscoverPage() {
     fetchThreads();
   }, []);
 
+  console.log(threads[0]);
+
   // Function to check if an index is featured
   const isFeatured = (index: number): boolean =>
     featuredIndices.includes(index);

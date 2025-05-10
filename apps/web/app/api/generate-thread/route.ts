@@ -103,7 +103,6 @@ export async function GET(req: NextRequest) {
     const { data: threads, error } = await supabase
       .from("threads")
       .select("*")
-      .eq("user_id", userId)
       .order("created_at", { ascending: false });
 
     if (error) {
