@@ -8,14 +8,15 @@ import {
   SidebarTrigger,
 } from "@workspace/ui/components/sidebar";
 import ActionSearchBar from "@/components/ui/kokonutui/action-search-bar";
-import { ThemeSwitcher } from "@/components/ui/kibo-ui/theme-switcher";
 import ThemeToggleButton from "@/components/ui/theme-toggle-button";
 import Link from "next/link";
 import Image from "next/image";
 import { BannerNewFeature } from "@/components/landingPage/Banner";
+import { Menu } from "lucide-react"; // Or use any icon system you're using
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleSidebarToggle = (e: CustomEvent) => {
@@ -26,11 +27,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       "sidebar-toggle",
       handleSidebarToggle as EventListener
     );
-    return () =>
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind md: breakpoint
+    };
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
       window.removeEventListener(
         "sidebar-toggle",
         handleSidebarToggle as EventListener
       );
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const toggleSidebar = () => {
@@ -49,34 +59,45 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="flex h-screen w-screen overflow-hidden">
           {/* Sidebar */}
           <div
-            className={`${
-              sidebarCollapsed ? "w-16" : "w-64"
-            } flex flex-col transition-all duration-300 h-full border-r border-border bg-white z-10`}
+            className={`
+              ${sidebarCollapsed || isMobile ? "hidden" : "block"}
+              md:flex flex-col transition-all duration-300 h-full border-r border-border bg-white z-10 w-64
+            `}
           >
             <EmailDashboard />
           </div>
 
           <div className="flex flex-col flex-1">
-            {/* Top header with search bar and theme switcher */}
-            <div className="h-12 w-full flex items-center justify-between  z-20 py-2">
-              <div className="flex items-center justify-center gap-4">
-                <div className="w-80 h-10 pt-1">
+            {/* Top Header */}
+            <div className="h-12 w-full flex items-center justify-between z-20 px-2 py-2 border-b border-border bg-background">
+              <div className="flex items-center gap-2">
+                {/* Mobile sidebar toggle */}
+                <button
+                  onClick={toggleSidebar}
+                  className="md:hidden p-2 rounded hover:bg-muted"
+                  aria-label="Toggle Sidebar"
+                >
+                  <Menu className="w-5 h-5" />
+                </button>
+
+                <div className="w-full max-w-xs md:max-w-md h-10">
                   <ActionSearchBar />
                 </div>
               </div>
-              <div className="flex items-center pr-2">
+
+              <div className="flex items-center gap-2">
                 <ThemeToggleButton start="top-right" />
                 <Link className="flex text-sm items-center" href={"/"}>
                   <Image
-                    width={56}
-                    height={56}
+                    width={32}
+                    height={32}
                     src="/logo.png"
                     alt="Logo"
                     className="block dark:hidden"
                   />
                   <Image
-                    width={40}
-                    height={40}
+                    width={32}
+                    height={32}
                     src="/logo2.png"
                     alt="Logo"
                     className="hidden dark:block"
@@ -85,10 +106,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </div>
 
-            {/* Main Content Area */}
+            {/* Main Content */}
             <div className="flex-1 bg-muted/40 flex justify-center items-start pt-1 pb-2 overflow-hidden">
-              <div className="w-full h-full max-w-auto overflow-y-scroll rounded-2xl border border-border bg-background">
-                <div className="h-full ">{children}</div>
+              <div className="w-full h-full max-w-full overflow-y-scroll rounded-2xl border border-border bg-background">
+                <div className="h-full">{children}</div>
               </div>
             </div>
           </div>
